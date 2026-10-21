@@ -13,7 +13,6 @@ const zh: Messages = {
   },
   halloween: {
     badge: "万圣节",
-    until: "季节主题截至 2026年11月1日 00:01",
   },
   stats: {
     playersOnline: "在线玩家",

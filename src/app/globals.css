@@ -36,7 +36,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 
   body {
@@ -173,8 +173,17 @@
     calc((var(--mouse-y, 35%) - 35%) * var(--hallo-depth, 6) / 22),
     0
   );
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+}
+
+.ze-atmosphere,
+.halloween-scene-layer {
+  transform: translateZ(0);
+  contain: paint;
+  backface-visibility: hidden;
+}
+
+html.is-scrolling .halloween-zombie {
+  animation-play-state: paused;
 }
 
 [data-theme="halloween"] .ze-cursor-glow-secondary {

@@ -12,7 +12,6 @@ const en = {
   },
   halloween: {
     badge: "Halloween",
-    until: "Seasonal theme until 1 Nov 2026, 00:01",
   },
   stats: {
     playersOnline: "Players Online",

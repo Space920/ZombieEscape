@@ -14,7 +14,6 @@ const de: Messages = {
   },
   halloween: {
     badge: "Halloween",
-    until: "Saisonales Theme bis 1. Nov 2026, 00:01",
   },
   stats: {
     playersOnline: "Spieler online",

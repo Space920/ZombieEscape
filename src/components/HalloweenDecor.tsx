@@ -89,12 +89,27 @@ export default function HalloweenDecor() {
       clearHalloweenTheme();
     }, remaining);
 
-    return () => window.clearTimeout(timer);
+    let scrollIdle = 0;
+    const onScroll = () => {
+      document.documentElement.classList.add("is-scrolling");
+      window.clearTimeout(scrollIdle);
+      scrollIdle = window.setTimeout(() => {
+        document.documentElement.classList.remove("is-scrolling");
+      }, 140);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.clearTimeout(timer);
+      window.clearTimeout(scrollIdle);
+      window.removeEventListener("scroll", onScroll);
+      document.documentElement.classList.remove("is-scrolling");
+    };
   }, []);
 
   return (
     <div
-      className="halloween-only pointer-events-none fixed inset-0 z-[1] overflow-hidden text-[var(--accent-green)]"
+      className="halloween-scene-layer halloween-only pointer-events-none fixed inset-0 z-[1] overflow-hidden text-[var(--accent-green)]"
       aria-hidden="true"
     >
       <HalloweenScene />

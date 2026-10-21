@@ -13,7 +13,6 @@ const ko: Messages = {
   },
   halloween: {
     badge: "할로윈",
-    until: "시즌 테마는 2026년 11월 1일 00:01까지",
   },
   stats: {
     playersOnline: "온라인 플레이어",

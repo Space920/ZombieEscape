@@ -13,7 +13,6 @@ const ja: Messages = {
   },
   halloween: {
     badge: "ハロウィン",
-    until: "シーズンテーマは 2026年11月1日 0:01 まで",
   },
   stats: {
     playersOnline: "オンラインプレイヤー",

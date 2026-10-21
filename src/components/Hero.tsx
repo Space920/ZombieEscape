@@ -37,9 +37,6 @@ export default function Hero() {
             <p className="mt-2 text-xs text-[var(--text-secondary)]/80">
               {t("hero.tagline")}
             </p>
-            <p className="halloween-only mt-1 text-xs text-[var(--text-secondary)]">
-              {t("halloween.until")}
-            </p>
             <p className="mt-2 text-sm">
               <Link
                 href="/zombie-escape"

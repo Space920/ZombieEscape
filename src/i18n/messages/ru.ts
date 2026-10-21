@@ -14,7 +14,6 @@ const ru: Messages = {
   },
   halloween: {
     badge: "Хэллоуин",
-    until: "Сезонная тема до 1 ноя 2026, 00:01",
   },
   stats: {
     playersOnline: "Игроков онлайн",

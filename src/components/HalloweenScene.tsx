@@ -157,7 +157,7 @@ export default function HalloweenScene() {
     let raf = 0;
     let running = true;
 
-    const bats: Bat[] = Array.from({ length: reduced ? 0 : 12 }, () => ({
+    const bats: Bat[] = Array.from({ length: reduced ? 0 : 6 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h * 0.5,
       vx: (Math.random() - 0.5) * 0.8,
@@ -200,7 +200,7 @@ export default function HalloweenScene() {
           scale: 0.75 + Math.random() * 0.7,
           phase: Math.random() * Math.PI * 2,
         });
-        if (bats.length > 18) bats.shift();
+        if (bats.length > 10) bats.shift();
       }
       spawnSparks(x, y, 8);
     };
@@ -224,8 +224,31 @@ export default function HalloweenScene() {
 
     let last = performance.now();
     let trailAcc = 0;
+    let scrolling = false;
+    let scrollIdle = 0;
+    const onScroll = () => {
+      scrolling = true;
+      window.clearTimeout(scrollIdle);
+      scrollIdle = window.setTimeout(() => {
+        scrolling = false;
+        last = performance.now();
+      }, 140);
+    };
+    const onVisibility = () => {
+      running = !document.hidden;
+      if (running) {
+        last = performance.now();
+        raf = requestAnimationFrame(tick);
+      }
+    };
+
     const tick = (now: number) => {
       if (!running) return;
+      raf = requestAnimationFrame(tick);
+      if (scrolling) {
+        last = now;
+        return;
+      }
       const dt = Math.min(32, now - last) / 16.67;
       last = now;
 
@@ -314,22 +337,32 @@ export default function HalloweenScene() {
         }
       }
 
-      raf = requestAnimationFrame(tick);
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("click", onClick);
     window.addEventListener("resize", onResize);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("visibilitychange", onVisibility);
     raf = requestAnimationFrame(tick);
 
     return () => {
       running = false;
       cancelAnimationFrame(raf);
+      window.clearTimeout(scrollIdle);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("click", onClick);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 h-full w-full"
+      style={{ contain: "strict" }}
+    />
+  );
 }
