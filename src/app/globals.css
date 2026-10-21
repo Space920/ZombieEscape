@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ze-bg: var(--bg-primary);
+  --color-ze-surface: var(--bg-surface);
+  --color-ze-border: var(--border-subtle);
+  --color-ze-green: var(--accent-green);
+  --color-ze-green-dim: var(--accent-green-dim);
+  --color-ze-red: #ff4444;
+  --color-ze-amber: #ffb020;
+  --color-ze-muted: var(--text-secondary);
+  --font-display: "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Cascadia Code", "Consolas", monospace;
+}
+
+@layer base {
+  :root {
+    /* Design tokens — adjust here to fine-tune the skin */
+    --bg-primary: #040604;
+    --bg-secondary: #080c08;
+    --bg-surface: #0c120c;
+    --accent-green: #39ff14;
+    --accent-green-dim: #2ecc12;
+    --accent-green-muted: rgba(57, 255, 20, 0.12);
+    --border-green: rgba(57, 255, 20, 0.22);
+    --border-subtle: #162016;
+    --glow-green: rgba(57, 255, 20, 0.05);
+    --glow-green-strong: rgba(57, 255, 20, 0.09);
+    --text-primary: #f0f4f0;
+    --text-secondary: #5a6e5a;
+    --fog-green: rgba(20, 40, 20, 0.35);
+
+    --mouse-x: 50%;
+    --mouse-y: 35%;
+    --mouse-active: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+    font-family: var(--font-display);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: var(--accent-green-muted);
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--border-green);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .ze-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  .ze-grid {
+    background-image:
+      linear-gradient(rgba(57, 255, 20, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57, 255, 20, 0.025) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .ze-fog {
+    background: radial-gradient(
+      ellipse 120% 80% at 50% 0%,
+      rgba(20, 45, 20, 0.45) 0%,
+      transparent 70%
+    );
+  }
+
+  .ze-ambient {
+    background: radial-gradient(
+      ellipse 80% 50% at 50% 20%,
+      rgba(57, 255, 20, 0.03) 0%,
+      transparent 60%
+    );
+  }
+
+  .ze-cursor-glow {
+    background: radial-gradient(
+      700px circle at var(--mouse-x) var(--mouse-y),
+      rgba(57, 255, 20, calc(0.065 * var(--mouse-active))),
+      transparent 44%
+    );
+  }
+
+  .ze-cursor-glow-secondary {
+    background: radial-gradient(
+      900px circle at var(--mouse-x) var(--mouse-y),
+      rgba(34, 211, 238, calc(0.02 * var(--mouse-active))),
+      transparent 50%
+    );
+  }
+
+  .ze-card {
+    border: 1px solid var(--border-subtle);
+    background: color-mix(in srgb, var(--bg-surface) 80%, transparent);
+  }
+
+  .ze-card-hover:hover {
+    border-color: var(--border-green);
+  }
+
+  .ze-title-split {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .glow-green {
+    box-shadow:
+      0 0 20px rgba(57, 255, 20, 0.15),
+      0 0 40px rgba(57, 255, 20, 0.05);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe\:animate-pulse {
+    animation: none !important;
+  }
+
+  .ze-cursor-glow {
+    background: radial-gradient(
+      800px circle at 50% 35%,
+      rgba(57, 255, 20, 0.035),
+      transparent 50%
+    );
+  }
+
+  .ze-cursor-glow-secondary {
+    background: none;
+  }
+}

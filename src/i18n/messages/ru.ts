@@ -1,0 +1,212 @@
+import type { Messages } from "./en";
+
+const ru: Messages = {
+  language: { label: "Язык" },
+  hero: {
+    subtitle: "Браузер серверов Zombie Escape для Counter-Strike 2",
+    description:
+      "Подборка активных серверов и сообществ Zombie Escape. Смотрите онлайн, текущую карту и подключайтесь напрямую. Информация обновляется автоматически.",
+    tagline:
+      "Список серверов CS2 Zombie Escape, поддерживаемый сообществом.",
+    guideLink: "Что такое ZE? Как играть",
+    highlightGfl: "— самый популярный ZE-сервер в Америке",
+    highlightMap: "— самый популярный в Европе",
+  },
+  halloween: {
+    badge: "Хэллоуин",
+    until: "Сезонная тема до 1 ноя 2026, 00:01",
+  },
+  stats: {
+    playersOnline: "Игроков онлайн",
+    serversLive: "Серверов онлайн",
+    tracked: "Отслеживается",
+    communities: "Сообщества",
+    ariaLabel: "Статистика серверов",
+  },
+  controls: {
+    searchPlaceholder: "Поиск карты или сервера…",
+    searchAria: "Поиск серверов",
+    filterAria: "Фильтр по сообществу",
+    sortAria: "Сортировка серверов",
+    refreshAria: "Обновить список серверов",
+    allCommunities: "Все сообщества",
+    sortMostPlayers: "Больше игроков",
+    sortLeastPlayers: "Меньше игроков",
+    sortCommunity: "Сообщество",
+    sortName: "Имя сервера",
+    sortFavorites: "Избранные первыми",
+    regionAria: "Фильтр по региону",
+    allRegions: "Все регионы",
+    onlineOnly: "Только онлайн",
+    hasPlayers: "С игроками",
+    refresh: "Обновить",
+    updating: "Обновление…",
+    updated: "Обновлено {time}",
+  },
+  browser: {
+    errorUnavailable:
+      "Статус серверов временно недоступен. Показаны последние известные данные, если есть.",
+    noMatch: "Нет серверов по вашему запросу или фильтру.",
+    noData: "Данные серверов сейчас недоступны.",
+    resetFilters: "Сбросить фильтры",
+    liveNote:
+      "Информация о серверах запрашивается автоматически и иногда может задерживаться.",
+    showMore: "Показать ещё серверы ({count})",
+  },
+  activity: {
+    title: "ZE в реальном времени",
+    loading: "Загрузка активности…",
+    unavailable: "Данные активности недоступны.",
+    summary: "{players} игроков на {active} активных серверах",
+    mostActive: "Самый активный:",
+    players: "игроков",
+    topMap: "Популярная карта:",
+    updatedMoments: "Обновлено только что",
+    updatedAt: "Обновлено {time}",
+  },
+  favorites: {
+    add: "В избранное",
+    remove: "Убрать",
+    addAria: "Добавить {name} в избранное",
+    removeAria: "Убрать {name} из избранного",
+  },
+  weeklyStats: {
+    loading: "Загрузка недельной статистики…",
+    summary:
+      "За неделю: {visitors} посетителей · пик {peak} игроков ZE · ~{avg} в среднем онлайн",
+  },
+  gameGroups: {
+    featuredTitle: "Самые популярные",
+    featuredSubtitle:
+      "GFL — Америка · Mapeadores — Европа · Possession — Азия",
+    featuredBadge: "Топ",
+    cs2Title: "Все серверы CS2",
+    cs2Subtitle: "По числу игроков — топ-серверы тоже здесь.",
+    cssTitle: "Counter-Strike: Source",
+    cssSubtitle:
+      "Legacy CS:S серверы — нужен установленный CS:S. Несовместимо с CS2.",
+    playersOnline: "{players} игроков · {online}/{total} онлайн",
+  },
+  serverRow: {
+    full: "Полный",
+    offline: "Оффлайн",
+    join: "Войти",
+    details: "Подробнее",
+    copyIp: "Копировать IP",
+    copied: "Скопировано",
+    copyConnect: "Копировать connect",
+    copyIpAria: "Копировать IP {ip}",
+    popularNa: "Самый популярный в Америке",
+    popularEu: "Самый популярный в Европе",
+    popularAs: "Самый популярный в Азии",
+  },
+  links: { website: "Сайт", discord: "Discord" },
+  detail: {
+    ariaLabel: "Подробности {name}",
+    close: "Закрыть",
+    closeDialog: "Закрыть окно",
+    loading: "Загрузка…",
+    error: "Не удалось загрузить данные сервера.",
+    currentMap: "Текущая карта",
+    playersOnline: "Игроков онлайн ({count})",
+    namesHidden: "Имена скрыты сервером",
+    noPlayerList: "Список игроков недоступен для этого сервера.",
+    serverOffline: "Сервер оффлайн.",
+    mapHistory: "Недавняя история карт (24ч)",
+    trend24h: "Тренд за 24ч:",
+    noMapHistory: "История карт для этого сервера недоступна.",
+    noMaps24h: "Других карт за последние 24 часа не было.",
+    viewMapHistory: "Смотреть историю карт",
+    onlineMeta: "{community} · {players}/{max} онлайн",
+    pingMeta: " · {ping}ms",
+    played: " сыграно",
+    peak: " пик",
+    playersRange: "{start} → {end} игроков",
+    untilNow: " → сейчас",
+    refresh: "Обновить",
+    refreshing: "Обновление…",
+  },
+  mapProgress: {
+    title: "Прогресс карт сообщества",
+    homeTitle: "Прогресс карт Mapeadores",
+    homeDescription:
+      "Следите за кастомными картами, пройденными EU-сообществом Mapeadores — живые обновления.",
+    loading: "Загрузка прогресса…",
+    error: "Данные прогресса временно недоступны.",
+    beaten: "пройдено",
+    remaining: "осталось",
+    complete: "завершено",
+    liveNote: "Живой прогресс карт Mapeadores · обновление каждую минуту",
+    liveNoteGfl: "Живой прогресс карт GFL · обновление каждую минуту",
+    viewFullList: "Полный список карт →",
+    missingData: "Данные отсутствуют — будут добавлены как можно скорее.",
+  },
+  trend: { up: "Рост", down: "Спад", flat: "Стабильно" },
+  regions: {
+    NA: "Северная Америка",
+    EU: "Европа",
+    RU: "Россия",
+    JP: "Япония",
+    AS: "Азия",
+    BR: "Бразилия",
+    CN: "Китай",
+    KR: "Корея",
+  },
+  contact: {
+    heading: "Вопросы или предложения?",
+    discordLabel: "Discord:",
+    copyDiscord: "Копировать имя Discord",
+    copied: "Скопировано!",
+    copyAria: "Копировать Discord spacemonkey716",
+  },
+  footer: {
+    disclaimer:
+      "Список от сообщества · Не связан с Valve и перечисленными сообществами",
+    about:
+      "Создано с помощью ИИ как простой обзор для игроков ZE — особенно для возвращающихся из CS:GO и других игр.",
+    privacy: "Политика конфиденциальности",
+  },
+  nav: {
+    backToServers: "← Назад к серверам",
+    backToBrowser: "← Назад к браузеру серверов",
+  },
+  privacy: {
+    title: "Политика конфиденциальности",
+    updated: "Обновлено: 31 августа 2026",
+    overviewTitle: "Обзор",
+    overviewText:
+      "Этот сайт — браузер серверов CS2 Zombie Escape от сообщества. Показывает публичную информацию: игроки, карты, ссылки сообществ. Регистрация не требуется.",
+    collectTitle: "Какие данные мы собираем",
+    serverDataLabel: "Данные серверов:",
+    serverDataText:
+      "Мы запрашиваем публичные игровые серверы и сторонние сервисы для отображения статуса, карт и истории. Эти данные о серверах, а не о вас лично.",
+    browserStorageLabel: "Хранилище браузера:",
+    browserStorageText:
+      "Сайт может сохранять последние результаты списка в session storage для быстрой загрузки. Данные остаются на вашем устройстве и удаляются при закрытии вкладки.",
+    hostingLogsLabel: "Логи хостинга:",
+    hostingLogsText:
+      "Хостинг-провайдер может собирать стандартные технические логи (IP, браузер, время запроса) для безопасности и надёжности.",
+    visitStatsLabel: "Анонимная статистика посещений:",
+    visitStatsText:
+      "Мы примерно считаем недельных посетителей через одноразовый сигнал за сессию. IP хешируются и не хранятся в открытом виде.",
+    thirdPartyTitle: "Сторонние сервисы",
+    thirdPartyText:
+      "Для статуса и истории карт сайт может обращаться к игровым серверам и публичным API третьих лиц. У них свои политики конфиденциальности. При настройке может загружаться аналитика вроде Plausible.",
+    notDoTitle: "Чего мы не делаем",
+    notSell: "Не продаём персональные данные.",
+    notPayment: "Не собираем платёжную информацию.",
+    notProfile:
+      "Не собираем Steam ID или ники для профилирования. Имена игроков — из публичных ответов сервера на момент просмотра.",
+    contactTitle: "Контакт",
+    contactText: "Вопросы по политике или сайту можно отправить на",
+  },
+  duration: {
+    dash: "—",
+    min: "{n} мин",
+    hours: "{h}ч {m}м",
+    minutesSeconds: "{m}м {s}с",
+    seconds: "{s}с",
+  },
+};
+
+export default ru;
