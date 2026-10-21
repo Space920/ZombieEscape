@@ -29,7 +29,7 @@ export default function ServerStatsBar({
 
   return (
     <div
-      className="mb-4 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-b border-[var(--border-subtle)] pb-4 text-sm"
+      className="mb-4 flex flex-wrap items-baseline gap-x-5 gap-y-1 pb-1 text-sm"
       aria-label={t("stats.ariaLabel")}
     >
       {items.map((item) => (

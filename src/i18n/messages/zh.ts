@@ -13,6 +13,8 @@ const zh: Messages = {
   },
   halloween: {
     badge: "万圣节",
+    hide: "关闭万圣节",
+    show: "打开万圣节",
   },
   stats: {
     playersOnline: "在线玩家",
@@ -159,6 +161,7 @@ const zh: Messages = {
     about:
       "在 AI 辅助下制作，为 ZE 玩家（尤其是从 CS:GO 或其他游戏回归的玩家）提供快速概览。",
     privacy: "隐私政策",
+    directory: "更多服务器",
   },
   nav: {
     backToServers: "← 返回服务器列表",

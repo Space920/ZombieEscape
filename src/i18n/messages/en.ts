@@ -12,6 +12,8 @@ const en = {
   },
   halloween: {
     badge: "Halloween",
+    hide: "Hide Halloween",
+    show: "Show Halloween",
   },
   stats: {
     playersOnline: "Players Online",
@@ -161,6 +163,7 @@ const en = {
     about:
       "Built with AI assistance as a simple overview for ZE players — especially those returning from CS:GO or other games — to quickly see what's live.",
     privacy: "Privacy Policy",
+    directory: "More servers",
   },
   nav: {
     backToServers: "← Back to servers",

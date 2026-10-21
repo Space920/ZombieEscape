@@ -13,6 +13,8 @@ const ko: Messages = {
   },
   halloween: {
     badge: "할로윈",
+    hide: "할로윈 끄기",
+    show: "할로윈 켜기",
   },
   stats: {
     playersOnline: "온라인 플레이어",
@@ -162,6 +164,7 @@ const ko: Messages = {
     about:
       "AI 지원으로 제작된 ZE 플레이어용 간단한 개요 사이트입니다 — CS:GO 등 다른 게임에서 돌아오는 분들을 위해.",
     privacy: "개인정보 처리방침",
+    directory: "서버 더 보기",
   },
   nav: {
     backToServers: "← 서버 목록으로",

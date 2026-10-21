@@ -14,6 +14,8 @@ const de: Messages = {
   },
   halloween: {
     badge: "Halloween",
+    hide: "Halloween aus",
+    show: "Halloween an",
   },
   stats: {
     playersOnline: "Spieler online",
@@ -165,6 +167,7 @@ const de: Messages = {
     about:
       "Mit KI-Unterstützung erstellt — eine einfache Übersicht für ZE-Spieler, besonders für Rückkehrer aus CS:GO oder anderen Spielen.",
     privacy: "Datenschutz",
+    directory: "Weitere Server",
   },
   nav: {
     backToServers: "← Zurück zu Servern",

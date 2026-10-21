@@ -13,6 +13,8 @@ const ja: Messages = {
   },
   halloween: {
     badge: "ハロウィン",
+    hide: "ハロウィンを消す",
+    show: "ハロウィンを表示",
   },
   stats: {
     playersOnline: "オンラインプレイヤー",
@@ -163,6 +165,7 @@ const ja: Messages = {
     about:
       "AI の支援で作成 — CS:GO など他ゲームから戻ってきた ZE プレイヤー向けの、手軽な一覧サイトです。",
     privacy: "プライバシーポリシー",
+    directory: "ほかのサーバー",
   },
   nav: {
     backToServers: "← サーバー一覧に戻る",

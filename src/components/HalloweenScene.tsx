@@ -71,32 +71,125 @@ function drawBat(ctx: CanvasRenderingContext2D, bat: Bat, flap: number) {
   ctx.restore();
 }
 
-function drawMoon(
+function moonAnchor(w: number, h: number, mx: number, my: number) {
+  return {
+    x: w * 0.86 + (mx - 0.5) * 28,
+    y: h * 0.12 + (my - 0.5) * 18,
+    r: Math.max(28, Math.min(w, h) * 0.045),
+  };
+}
+
+function drawMoonGlow(
   ctx: CanvasRenderingContext2D,
-  w: number,
-  h: number,
-  mx: number,
-  my: number,
+  moon: { x: number; y: number; r: number },
 ) {
-  const x = w * 0.86 + (mx - 0.5) * 28;
-  const y = h * 0.12 + (my - 0.5) * 18;
-  const r = Math.max(28, Math.min(w, h) * 0.045);
-  const glow = ctx.createRadialGradient(x, y, r * 0.2, x, y, r * 2.8);
+  const glow = ctx.createRadialGradient(
+    moon.x,
+    moon.y,
+    moon.r * 0.2,
+    moon.x,
+    moon.y,
+    moon.r * 2.8,
+  );
   glow.addColorStop(0, "rgba(255, 224, 150, 0.4)");
   glow.addColorStop(0.4, "rgba(255, 170, 70, 0.14)");
   glow.addColorStop(1, "rgba(255, 170, 70, 0)");
   ctx.fillStyle = glow;
   ctx.beginPath();
-  ctx.arc(x, y, r * 2.4, 0, Math.PI * 2);
+  ctx.arc(moon.x, moon.y, moon.r * 2.4, 0, Math.PI * 2);
   ctx.fill();
+}
+
+function drawMoonDisc(
+  ctx: CanvasRenderingContext2D,
+  moon: { x: number; y: number; r: number },
+) {
   ctx.fillStyle = "#f0ddb0";
   ctx.beginPath();
-  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.arc(moon.x, moon.y, moon.r, 0, Math.PI * 2);
   ctx.fill();
   ctx.fillStyle = "rgba(7, 10, 7, 0.92)";
   ctx.beginPath();
-  ctx.arc(x + r * 0.38, y - r * 0.08, r * 0.82, 0, Math.PI * 2);
+  ctx.arc(moon.x + moon.r * 0.38, moon.y - moon.r * 0.08, moon.r * 0.82, 0, Math.PI * 2);
   ctx.fill();
+}
+
+function drawWitch(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  scale: number,
+  bob: number,
+) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(-0.16 + bob * 0.1);
+  ctx.scale(scale, scale);
+  ctx.shadowColor = "rgba(255, 196, 110, 0.35)";
+  ctx.shadowBlur = 10;
+
+  ctx.strokeStyle = "#8a5a28";
+  ctx.lineWidth = 1.8;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(-28, 5);
+  ctx.lineTo(22, -3);
+  ctx.stroke();
+
+  ctx.strokeStyle = "#c4843a";
+  ctx.lineWidth = 1.2;
+  for (let i = 0; i < 8; i++) {
+    const t = i / 7;
+    ctx.beginPath();
+    ctx.moveTo(-26, 5);
+    ctx.lineTo(-38 - t * 2, -4 + t * 14);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = "#3d2a52";
+  ctx.beginPath();
+  ctx.moveTo(-1, 0);
+  ctx.quadraticCurveTo(-18, 7, -14, 20);
+  ctx.quadraticCurveTo(1, 12, 9, 18);
+  ctx.quadraticCurveTo(7, 3, 5, -1);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = "#4a3560";
+  ctx.beginPath();
+  ctx.ellipse(2, 1, 4.6, 5.6, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#5a4470";
+  ctx.beginPath();
+  ctx.arc(3.4, -7, 2.7, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#2c1c3d";
+  ctx.beginPath();
+  ctx.moveTo(-4.2, -7.8);
+  ctx.lineTo(12, -8.2);
+  ctx.lineTo(4, -22);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(3.6, -8, 8, 1.5, -0.04, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = "#4a3560";
+  ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.moveTo(5.8, 3.2);
+  ctx.lineTo(16, 0.6);
+  ctx.stroke();
+
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = "rgba(57, 255, 20, 0.85)";
+  ctx.beginPath();
+  ctx.arc(4.6, -20.6, 1.1, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
 }
 
 function drawEyes(
@@ -157,7 +250,7 @@ export default function HalloweenScene() {
     let raf = 0;
     let running = true;
 
-    const bats: Bat[] = Array.from({ length: reduced ? 0 : 6 }, () => ({
+    const bats: Bat[] = Array.from({ length: reduced ? 0 : 4 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h * 0.5,
       vx: (Math.random() - 0.5) * 0.8,
@@ -167,11 +260,10 @@ export default function HalloweenScene() {
     }));
 
     const sparks: Spark[] = [];
+    const witch = { progress: 0.18, pause: 0 };
     const placeEyes = (): Eye[] => [
-      { x: w * 0.07, y: h * 0.16, size: 7, lookX: w * 0.07, lookY: h * 0.16 },
-      { x: w * 0.12, y: h * 0.38, size: 5, lookX: w * 0.12, lookY: h * 0.38 },
-      { x: w * 0.93, y: h * 0.2, size: 8, lookX: w * 0.93, lookY: h * 0.2 },
-      { x: w * 0.88, y: h * 0.42, size: 6, lookX: w * 0.88, lookY: h * 0.42 },
+      { x: w * 0.08, y: h * 0.18, size: 6, lookX: w * 0.08, lookY: h * 0.18 },
+      { x: w * 0.91, y: h * 0.22, size: 7, lookX: w * 0.91, lookY: h * 0.22 },
     ];
     let eyes = placeEyes();
 
@@ -256,10 +348,44 @@ export default function HalloweenScene() {
       smooth.y = lerp(smooth.y, mouse.y, 0.08 * dt);
 
       ctx.clearRect(0, 0, w, h);
-      drawMoon(ctx, w, h, smooth.x, smooth.y);
+      const moon = moonAnchor(w, h, smooth.x, smooth.y);
+      drawMoonGlow(ctx, moon);
 
       const mx = smooth.x * w;
       const my = smooth.y * h;
+
+      if (!reduced) {
+        if (witch.pause > 0) {
+          witch.pause -= dt;
+        } else {
+          witch.progress += dt * 0.0024;
+          if (witch.progress >= 1) {
+            witch.progress = 0;
+            witch.pause = 70 + Math.random() * 90;
+          }
+        }
+
+        if (witch.pause <= 0) {
+          const p = Math.max(0, Math.min(1, witch.progress));
+          const x = lerp(-90, moon.x, p);
+          const y =
+            lerp(h * 0.05, moon.y, p) + Math.sin(now / 420 + p * 6) * 8;
+          const dist = Math.hypot(x - moon.x, y - moon.y);
+          const behind = dist < moon.r * 0.92;
+          const fade = behind
+            ? Math.max(0, (dist - moon.r * 0.2) / (moon.r * 0.72))
+            : p < 0.04
+              ? p / 0.04
+              : 1;
+          if (fade > 0.03) {
+            ctx.globalAlpha = fade;
+            drawWitch(ctx, x, y, 1.85, Math.sin(now / 260));
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+
+      drawMoonDisc(ctx, moon);
 
       for (const eye of eyes) {
         const dx = mx - eye.x;
