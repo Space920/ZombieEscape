@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { SERVERS } from "@/data/servers";
 
+export const dynamic = "force-static";
+
 const SEO_PAGES = [
   "/zombie-escape",
   "/csgo-zombie-escape",

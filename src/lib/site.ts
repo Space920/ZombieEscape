@@ -84,11 +84,13 @@ export const rootMetadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     url: SITE_URL,
     locale: "en_US",
+    images: [{ url: "/assets/cs2-icon.png" }],
   },
   twitter: {
     card: "summary_large_image",
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
+    images: ["/assets/cs2-icon.png"],
   },
   robots: {
     index: true,

@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "generate:data": "npx tsx scripts/generate-live-data.ts",
     "build": "next build",
-    "start": "next start",
+    "start": "npx serve out",
     "lint": "next lint"
   },
   "dependencies": {
@@ -22,7 +23,9 @@
     "@types/react-dom": "^19.1.9",
     "eslint": "^9.34.0",
     "eslint-config-next": "^15.5.2",
+    "serve": "^14.2.6",
     "tailwindcss": "^4.1.12",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.2"
   }
 }

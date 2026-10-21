@@ -20,20 +20,20 @@ export const COMMUNITY_MAP_SHEETS: Record<
 > = {
   mapeadores: {
     communityId: "mapeadores",
-    apiPath: "/api/mapeadores/maps",
+    apiPath: "/data/maps/mapeadores.json",
     pagePath: "/mapeadores/maps",
     title: "Mapeadores Map Progress",
     description:
-      "Community map completion — auto-refreshes every minute.",
+      "Community map completion — updated throughout the day.",
     attribution: "Map progress data provided by the Mapeadores community.",
   },
   gfl: {
     communityId: "gfl",
-    apiPath: "/api/gfl/maps",
+    apiPath: "/data/maps/gfl.json",
     pagePath: "/gfl/maps",
     title: "GFL Map Progress",
     description:
-      "Games For Life map completion — auto-refreshes every minute.",
+      "Games For Life map completion — updated throughout the day.",
     attribution: "Map progress data provided by the GFL community.",
   },
 };

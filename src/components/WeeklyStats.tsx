@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "@/i18n/LocaleProvider";
+import { LIVE_STATS_PATH } from "@/lib/live-data-paths";
 
 interface WeeklyStatsResponse {
   week: {
@@ -21,7 +22,7 @@ export default function WeeklyStats() {
   useEffect(() => {
     let cancelled = false;
 
-    fetch("/api/stats", { cache: "no-store" })
+    fetch(LIVE_STATS_PATH, { cache: "no-store" })
       .then((res) => (res.ok ? res.json() : null))
       .then((data: WeeklyStatsResponse | null) => {
         if (!cancelled && data?.week) setStats(data.week);

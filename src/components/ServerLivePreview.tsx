@@ -11,6 +11,7 @@ import {
 } from "@/lib/connect";
 import CommunityLogo from "./CommunityLogo";
 import MapNameLink from "./MapNameLink";
+import { liveServerDetailPath } from "@/lib/live-data-paths";
 
 interface ServerLivePreviewProps {
   serverId: string;
@@ -25,7 +26,7 @@ export default function ServerLivePreview({ serverId }: ServerLivePreviewProps) 
   useEffect(() => {
     let cancelled = false;
 
-    fetch(`/api/servers/${serverId}`, { cache: "no-store" })
+    fetch(liveServerDetailPath(serverId), { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error("unavailable");
         return res.json() as Promise<ServerDetailResponse>;

@@ -25,10 +25,20 @@ export default function CursorGlow() {
 
     root.style.setProperty("--mouse-active", "1");
 
+    const current = { x: 50, y: 30 };
+
     const apply = () => {
-      root.style.setProperty("--mouse-x", `${targetRef.current.x}%`);
-      root.style.setProperty("--mouse-y", `${targetRef.current.y}%`);
-      rafRef.current = null;
+      current.x += (targetRef.current.x - current.x) * 0.14;
+      current.y += (targetRef.current.y - current.y) * 0.14;
+      root.style.setProperty("--mouse-x", `${current.x}%`);
+      root.style.setProperty("--mouse-y", `${current.y}%`);
+      const dx = targetRef.current.x - current.x;
+      const dy = targetRef.current.y - current.y;
+      if (dx * dx + dy * dy > 0.004) {
+        rafRef.current = requestAnimationFrame(apply);
+      } else {
+        rafRef.current = null;
+      }
     };
 
     const onMove = (e: MouseEvent) => {

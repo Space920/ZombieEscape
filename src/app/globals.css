@@ -129,6 +129,71 @@
   }
 }
 
+.halloween-only {
+  display: none;
+}
+
+[data-theme="halloween"] .halloween-only {
+  display: block;
+}
+
+[data-theme="halloween"] .halloween-only.halloween-badge {
+  display: inline-flex;
+}
+
+[data-theme="halloween"] .halloween-only.halloween-zombies {
+  display: flex;
+}
+
+@keyframes halloween-zombie-idle {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+.halloween-zombie {
+  animation: halloween-zombie-idle 2.6s ease-in-out infinite;
+}
+
+.halloween-zombie:nth-child(2) {
+  animation-delay: 0.45s;
+}
+
+.halloween-zombie:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+.halloween-parallax {
+  transform: translate3d(
+    calc((var(--mouse-x, 50%) - 50%) * var(--hallo-depth, 6) / 18),
+    calc((var(--mouse-y, 35%) - 35%) * var(--hallo-depth, 6) / 22),
+    0
+  );
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+[data-theme="halloween"] .ze-cursor-glow-secondary {
+  background: radial-gradient(
+    520px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 140, 40, calc(0.07 * var(--mouse-active))),
+    transparent 46%
+  );
+}
+
+[data-theme="halloween"] .ze-fog {
+  background: radial-gradient(
+    ellipse 120% 80% at 50% 0%,
+    rgba(20, 45, 20, 0.4) 0%,
+    rgba(40, 18, 6, 0.18) 42%,
+    transparent 72%
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   .motion-safe\:animate-pulse {
     animation: none !important;
@@ -144,5 +209,13 @@
 
   .ze-cursor-glow-secondary {
     background: none;
+  }
+
+  .halloween-zombie {
+    animation: none;
+  }
+
+  .halloween-parallax {
+    transform: none;
   }
 }

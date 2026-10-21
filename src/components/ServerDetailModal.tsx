@@ -17,6 +17,7 @@ import {
 } from "@/lib/format-duration";
 import { useLocale, useTranslations } from "@/i18n/LocaleProvider";
 import { getMessages } from "@/i18n/messages";
+import { liveServerDetailPath } from "@/lib/live-data-paths";
 
 interface ServerDetailModalProps {
   server: ServerStatus | null;
@@ -101,7 +102,7 @@ export default function ServerDetailModal({
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`/api/servers/${serverId}`, { cache: "no-store" });
+      const res = await fetch(liveServerDetailPath(serverId), { cache: "no-store" });
       if (!res.ok) throw new Error("Failed to load server details");
       setDetail(await res.json());
     } catch {

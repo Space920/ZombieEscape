@@ -23,6 +23,7 @@ import ServerControls from "./ServerControls";
 import ServerStatsBar from "./ServerStatsBar";
 import ServerDetailModal from "./ServerDetailModal";
 import { useTranslations } from "@/i18n/LocaleProvider";
+import { LIVE_SERVERS_PATH } from "@/lib/live-data-paths";
 
 const REFRESH_INTERVAL = 60_000;
 
@@ -69,7 +70,7 @@ export default function ServerBrowser() {
       else if (!hasLoaded.current) setLoading(true);
 
       try {
-        const res = await fetch("/api/servers");
+        const res = await fetch(LIVE_SERVERS_PATH, { cache: "no-store" });
         if (!res.ok) throw new Error("Failed to fetch servers");
         const data: ServersResponse = await res.json();
         setServers(data.servers);
