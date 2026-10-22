@@ -110,10 +110,7 @@ function Web({
 }
 
 function measurePageHeight() {
-  return Math.max(
-    document.documentElement.scrollHeight,
-    document.body.scrollHeight,
-  );
+  return document.body.offsetHeight;
 }
 
 export default function HalloweenDecor() {
@@ -159,9 +156,10 @@ export default function HalloweenDecor() {
     };
   }, []);
 
-  const visibleScatter = SCATTER.filter(
-    (item) => pageHeight === 0 || item.top < pageHeight - 80,
-  );
+  const visibleScatter =
+    pageHeight > 0
+      ? SCATTER.filter((item) => item.top < pageHeight - 80)
+      : [];
 
   return (
     <>
@@ -182,8 +180,7 @@ export default function HalloweenDecor() {
       </div>
 
       <div
-        className="halloween-page-layer halloween-only pointer-events-none absolute inset-x-0 top-0 z-[1] text-[var(--accent-green)]"
-        style={{ height: pageHeight || "100%" }}
+        className="halloween-page-layer halloween-only pointer-events-none absolute inset-0 z-[1] overflow-hidden text-[var(--accent-green)]"
         aria-hidden="true"
       >
         {visibleScatter.map((item) => (

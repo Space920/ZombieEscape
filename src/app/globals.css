@@ -37,6 +37,7 @@
 
   html {
     scroll-behavior: auto;
+    overflow-x: clip;
   }
 
   body {
@@ -288,6 +289,284 @@ html.is-scrolling .pumpkin-lit {
   );
 }
 
+.hero-stage {
+  position: relative;
+  overflow: visible;
+}
+
+.cs2-logo-stage {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 4;
+}
+
+.cs2-logo-recoil {
+  display: inline-flex;
+  transform-origin: 30% 60%;
+}
+
+@keyframes cs2-logo-ready {
+  0%,
+  100% {
+    transform: none;
+  }
+  40% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+}
+
+@keyframes cs2-logo-recoil {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  28% {
+    transform: translate(-4px, 1px) rotate(-8deg);
+  }
+  58% {
+    transform: translate(1px, -1px) rotate(3deg);
+  }
+}
+
+.cs2-muzzle {
+  position: absolute;
+  right: -18px;
+  top: 40%;
+  width: 26px;
+  height: 16px;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    circle,
+    #fff8d0 0 16%,
+    #ffb020 30%,
+    rgba(255, 80, 0, 0) 72%
+  );
+  filter: drop-shadow(0 0 6px #ff9a1a);
+  clip-path: polygon(0 48%, 58% 8%, 100% 50%, 58% 92%);
+}
+
+@keyframes cs2-muzzle {
+  0%,
+  35% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  36%,
+  72% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  73%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cs2-tracer {
+  position: absolute;
+  left: calc(100% - 4px);
+  top: 46%;
+  height: 2px;
+  width: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, #fff6c4, rgba(255, 176, 40, 0.75), transparent);
+  box-shadow: 0 0 6px rgba(255, 176, 40, 0.55);
+  transform-origin: left center;
+  opacity: 0;
+}
+
+.cs2-tracer-b {
+  top: 52%;
+}
+
+.cs2-tracer-c {
+  top: 40%;
+}
+
+@keyframes cs2-tracer {
+  0% {
+    width: 8px;
+    opacity: 0.95;
+  }
+  70% {
+    width: 92px;
+    opacity: 0.7;
+  }
+  100% {
+    width: 128px;
+    opacity: 0;
+  }
+}
+
+.zombie-word {
+  position: relative;
+  display: inline-block;
+}
+
+.zombie-letter {
+  position: relative;
+  display: inline-block;
+}
+
+.zombie-e.is-hatching {
+  animation: intro-e-hatch 0.7s ease;
+}
+
+@keyframes intro-e-hatch {
+  0%,
+  100% {
+    transform: none;
+    filter: none;
+  }
+  30% {
+    transform: translateY(-2px) rotate(-8deg) scale(1.12);
+    filter: brightness(1.3);
+  }
+  58% {
+    transform: translateY(2px) rotate(6deg) scale(0.94);
+    color: #8f3a2a;
+  }
+}
+
+.letter-blood {
+  position: absolute;
+  inset: 0;
+  font: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: letter-blood-in 0.32s ease-out forwards;
+}
+
+.letter-blood--0 {
+  background-image:
+    linear-gradient(180deg, #c51f1f 0 18%, #8a1212 34%, rgba(90, 8, 8, 0.75) 48%, transparent 62%),
+    radial-gradient(6px 22px at 20% 30%, #9b1616 0 70%, transparent 72%),
+    radial-gradient(5px 16px at 78% 22%, #7a1010 0 68%, transparent 70%);
+}
+
+.letter-blood--1 {
+  background-image:
+    linear-gradient(186deg, #b41c1c 0 14%, #7c1010 30%, transparent 46%),
+    radial-gradient(10px 14px at 70% 12%, #d22727 0 62%, transparent 66%),
+    radial-gradient(5px 20px at 62% 38%, #8d1414 0 65%, transparent 68%);
+}
+
+.letter-blood--2 {
+  background-image:
+    linear-gradient(180deg, #be1d1d 0 16%, #6e0e0e 28%, transparent 40%),
+    radial-gradient(5px 26px at 24% 18%, #a01818 0 72%, transparent 74%),
+    radial-gradient(5px 22px at 76% 12%, #8a1212 0 70%, transparent 72%);
+}
+
+.letter-blood--3 {
+  background-image:
+    linear-gradient(178deg, #c82222 0 20%, #7a1010 40%, transparent 56%),
+    radial-gradient(9px 12px at 64% 16%, #e03434 0 60%, transparent 64%),
+    radial-gradient(4px 24px at 18% 28%, #8f1414 0 70%, transparent 72%);
+}
+
+.letter-blood--4 {
+  background-image:
+    linear-gradient(180deg, #d22727 0 22%, #8c1313 44%, rgba(80, 8, 8, 0.7) 62%, transparent 74%),
+    radial-gradient(7px 10px at 50% 6%, #ef3c3c 0 68%, transparent 70%);
+}
+
+.letter-blood--5 {
+  background-image:
+    linear-gradient(180deg, #c42020 0 16%, #7d1010 26%, transparent 38%),
+    radial-gradient(16px 9px at 50% 8%, #e23232 0 64%, transparent 68%),
+    radial-gradient(4px 28px at 14% 22%, #951616 0 72%, transparent 74%);
+}
+
+@keyframes letter-blood-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 88% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0);
+  }
+}
+
+.intro-zombie {
+  position: absolute;
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: 50% 100%;
+}
+
+.intro-zombie.is-out {
+  opacity: 1;
+}
+
+.intro-zombie.is-struck {
+  filter: brightness(2) saturate(0.35);
+}
+
+.intro-zombie-body {
+  display: inline-flex;
+}
+
+.intro-hit-flash {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 20px;
+  height: 20px;
+  translate: -50% -50%;
+  border-radius: 999px;
+  background: radial-gradient(circle, #fff 0 18%, #ffb020 34%, transparent 70%);
+  pointer-events: none;
+  animation: intro-hit-flash 0.22s ease-out forwards;
+}
+
+@keyframes intro-hit-flash {
+  0% {
+    opacity: 1;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+.hero-stage.is-firing .cs2-logo-recoil {
+  animation: cs2-logo-recoil 0.18s ease-in-out infinite;
+}
+
+.hero-stage.is-firing .cs2-logo-stage {
+  filter: drop-shadow(0 0 10px rgba(255, 176, 40, 0.35));
+}
+
+.hero-stage.is-firing .cs2-muzzle {
+  animation: cs2-muzzle 0.2s steps(2) infinite;
+}
+
+.hero-stage.is-firing .cs2-tracer {
+  animation: cs2-tracer 0.32s linear infinite;
+}
+
+.hero-stage.is-firing .cs2-tracer-b {
+  animation-delay: 0.1s;
+}
+
+.hero-stage.is-firing .cs2-tracer-c {
+  animation-delay: 0.2s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .motion-safe\:animate-pulse {
     animation: none !important;
@@ -308,8 +587,21 @@ html.is-scrolling .pumpkin-lit {
   .halloween-zombie,
   .zombie-hop,
   .pumpkin-lit,
-  .live-dot {
-    animation: none;
+  .live-dot,
+  .cs2-logo-recoil,
+  .cs2-muzzle,
+  .cs2-tracer,
+  .intro-zombie,
+  .zombie-e,
+  .letter-blood {
+    animation: none !important;
+  }
+
+  .intro-zombie,
+  .cs2-muzzle,
+  .cs2-tracer,
+  .letter-blood {
+    display: none;
   }
 
   .halloween-parallax {

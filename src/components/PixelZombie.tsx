@@ -65,6 +65,7 @@ interface PixelZombieProps {
   pose?: ZombiePose;
   pixel?: number;
   flip?: boolean;
+  idle?: boolean;
   className?: string;
 }
 
@@ -72,6 +73,7 @@ export default function PixelZombie({
   pose = "walk",
   pixel = 3,
   flip = false,
+  idle = true,
   className = "",
 }: PixelZombieProps) {
   const rows = POSES[pose];
@@ -88,7 +90,7 @@ export default function PixelZombie({
 
   return (
     <span
-      className={`halloween-zombie inline-flex ${flip ? "-scale-x-100" : ""} ${className}`}
+      className={`${idle ? "halloween-zombie" : ""} inline-flex ${flip ? "-scale-x-100" : ""} ${className}`}
     >
       <svg
         viewBox={`0 0 ${width} ${height}`}
