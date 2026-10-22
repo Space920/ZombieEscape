@@ -84,7 +84,8 @@ function parseMapeadoresStatus(payload: unknown): CommunityLive | null {
   const playerList: ServerPlayer[] = Array.isArray(data.players)
     ? data.players.flatMap((entry) => {
         const row = asRecord(entry);
-        const name = typeof row?.name === "string" ? row.name.trim() : "";
+        if (!row) return [];
+        const name = typeof row.name === "string" ? row.name.trim() : "";
         if (!name) return [];
         return [
           {
