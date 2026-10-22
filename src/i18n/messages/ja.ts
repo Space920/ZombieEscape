@@ -75,6 +75,19 @@ const ja: Messages = {
     summary:
       "今週: {visitors} 訪問者 · 最大 {peak} 人 ZE オンライン · 平均 ~{avg} 人",
   },
+  peaks: {
+    title: "ピーク時間",
+    open: "ピーク時間",
+    detailTitle: "ピーク時間",
+    collecting:
+      "ピーク時間を集計中です。数日後にまた確認してください。",
+    busiest: "いちばん混みやすいのは {weekday} の {time} 頃",
+    record: "最多: {when} に {players} 人",
+    weekdays: "曜日",
+    hours: "時間帯",
+    localNote: "時間グラフはお使いのタイムゾーンです。",
+    samples: "{count} 件のサンプル",
+  },
   gameGroups: {
     featuredTitle: "人気サーバー",
     featuredSubtitle:

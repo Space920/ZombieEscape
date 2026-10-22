@@ -15,7 +15,8 @@ export type CommunityId =
   | "zed"
   | "kaishui"
   | "zero"
-  | "upkk";
+  | "upkk"
+  | "open";
 
 import type { ServerPlayer } from "@/types/server-detail";
 

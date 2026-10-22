@@ -22,7 +22,7 @@ export default function Cs2Logo({
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <div
-        className="relative shrink-0 overflow-hidden rounded-md border border-[var(--border-subtle)] shadow-[0_0_20px_rgba(222,155,53,0.12)]"
+        className="relative shrink-0 overflow-hidden rounded-md border border-[var(--border-green)] shadow-[0_0_22px_rgba(57,255,20,0.16)]"
         style={{ width: px, height: px }}
       >
         <Image

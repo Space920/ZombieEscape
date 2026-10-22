@@ -29,7 +29,11 @@ export async function buildServerDetail(
           endPlayers: live.players || stats.currentMap.endPlayers,
           peakPlayers: Math.max(stats.currentMap.peakPlayers, live.players),
           playerCounts:
-            live.players > 0 ? [live.players] : stats.currentMap.playerCounts,
+            live.players > 0
+              ? stats.currentMap.playerCounts.at(-1) === live.players
+                ? stats.currentMap.playerCounts
+                : [...stats.currentMap.playerCounts, live.players]
+              : stats.currentMap.playerCounts,
         }
       : null,
     mapHistory: stats.mapHistory,

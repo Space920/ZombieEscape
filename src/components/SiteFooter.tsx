@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "@/i18n/LocaleProvider";
 
@@ -12,6 +13,40 @@ const SEO_LINKS = [
   { href: "/gfl/maps", label: "GFL maps" },
   { href: "/csgo-zombie-escape", label: "CS:GO ZE" },
 ] as const;
+
+function DirectoryLink() {
+  const t = useTranslations();
+  const [href, setHref] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/data/directory.json", { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { href?: string } | null) => {
+        if (cancelled) return;
+        if (typeof data?.href === "string" && data.href.startsWith("http")) {
+          setHref(data.href);
+        }
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (!href) return null;
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-[11px] text-[var(--text-secondary)] hover:text-[var(--accent-green)]"
+    >
+      {t("footer.directory")}
+    </a>
+  );
+}
 
 export default function SiteFooter() {
   const t = useTranslations();
@@ -29,6 +64,7 @@ export default function SiteFooter() {
               {link.label}
             </Link>
           ))}
+          <DirectoryLink />
         </nav>
         <p className="text-xs text-[var(--text-secondary)]">
           {t("footer.disclaimer")}

@@ -26,7 +26,7 @@ const SORT_KEYS: { value: SortOption; key: string }[] = [
 ];
 
 const inputClass =
-  "rounded border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3 py-2 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:border-[var(--border-green)] focus:outline-none";
+  "rounded-md border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3 py-2 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] transition-colors focus:border-[var(--border-green)] focus:outline-none";
 
 export default function ServerControls({
   sortBy,
@@ -55,14 +55,29 @@ export default function ServerControls({
 
   return (
     <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
-      <input
-        type="search"
-        placeholder={t("controls.searchPlaceholder")}
-        value={search}
-        onChange={(e) => onSearchChange(e.target.value)}
-        aria-label={t("controls.searchAria")}
-        className={`min-w-0 flex-1 ${inputClass}`}
-      />
+      <label className="relative min-w-0 flex-1">
+        <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-[var(--text-secondary)]">
+          <svg
+            viewBox="0 0 16 16"
+            className="h-3.5 w-3.5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            aria-hidden="true"
+          >
+            <circle cx="7" cy="7" r="4.2" />
+            <path d="M10.4 10.4 14 14" strokeLinecap="round" />
+          </svg>
+        </span>
+        <input
+          type="search"
+          placeholder={t("controls.searchPlaceholder")}
+          value={search}
+          onChange={(e) => onSearchChange(e.target.value)}
+          aria-label={t("controls.searchAria")}
+          className={`w-full pl-9 ${inputClass}`}
+        />
+      </label>
 
       <select
         value={communityFilter}

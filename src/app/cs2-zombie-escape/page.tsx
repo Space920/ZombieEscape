@@ -32,7 +32,7 @@ export default function Cs2ZombieEscapePage() {
       ]}
     >
       <h1 className="text-2xl font-bold text-[var(--text-primary)] sm:text-3xl">
-        CS2 Zombie Escape
+        CS2 <span className="text-[var(--accent-green)]">Zombie Escape</span>
       </h1>
       <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
         CS2 Zombie Escape (CS2 ZE) is the Source 2 continuation of the Counter-Strike

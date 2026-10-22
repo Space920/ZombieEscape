@@ -32,7 +32,7 @@ export default function CsgoZombieEscapePage() {
       ]}
     >
       <h1 className="text-2xl font-bold text-[var(--text-primary)] sm:text-3xl">
-        CS:GO Zombie Escape
+        CS:GO <span className="text-[var(--accent-green)]">Zombie Escape</span>
       </h1>
       <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
         CS:GO Zombie Escape (CS:GO ZE) is the game mode that popularised

@@ -19,7 +19,7 @@ export interface ServerMapStats {
   liveMap?: string;
 }
 
-const MIN_SNAPSHOTS_FOR_OWN_HISTORY = 4;
+const MIN_SNAPSHOTS_FOR_OWN_HISTORY = 2;
 
 function buildA2sHistoryMeta(): ServerHistoryMeta {
   return { source: "a2s" };

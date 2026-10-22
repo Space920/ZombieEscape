@@ -5,6 +5,7 @@ import CursorGlow from "@/components/CursorGlow";
 import MapProgressSection from "@/components/MapProgressSection";
 import SiteFooter from "@/components/SiteFooter";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import PeakHoursToggle from "@/components/PeakHoursToggle";
 import { useTranslations } from "@/i18n/LocaleProvider";
 
 export default function MapeadoresMapsPage() {
@@ -25,7 +26,10 @@ export default function MapeadoresMapsPage() {
             >
               {t("nav.backToServers")}
             </Link>
-            <LanguageSwitcher />
+            <div className="flex items-center gap-2">
+              <PeakHoursToggle />
+              <LanguageSwitcher />
+            </div>
           </div>
         </nav>
       </div>

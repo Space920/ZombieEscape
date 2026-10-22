@@ -29,6 +29,7 @@ jobs:
       - name: Generate live data
         env:
           LIVE_FALLBACK_URL: ${{ secrets.LIVE_FALLBACK_URL }}
+          DIRECTORY_URL: ${{ secrets.DIRECTORY_URL }}
           HISTORY_GRAPH_URL: ${{ secrets.HISTORY_GRAPH_URL }}
           MAP_PROGRESS_MAPEADORES_CSV: ${{ secrets.MAP_PROGRESS_MAPEADORES_CSV }}
           MAP_PROGRESS_GFL_CSV: ${{ secrets.MAP_PROGRESS_GFL_CSV }}

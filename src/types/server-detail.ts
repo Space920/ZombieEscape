@@ -31,6 +31,22 @@ export interface ServerHistoryMeta {
   playerHistoryGraphUrl?: string;
 }
 
+export interface PeakHit {
+  players: number;
+  at: string;
+  map: string;
+}
+
+export interface PeakSummary {
+  samples: number;
+  weekdaysCovered: number;
+  allTimePeak: PeakHit | null;
+  busiestWeekday: number | null;
+  busiestHour: number | null;
+  weekdayAvg: number[];
+  hourAvg: number[];
+}
+
 export interface ServerDetailResponse {
   server: {
     id: string;
@@ -48,5 +64,6 @@ export interface ServerDetailResponse {
   currentMap: MapStint | null;
   mapHistory: MapStint[];
   history: ServerHistoryMeta;
+  peaks?: PeakSummary | null;
   fetchedAt: string;
 }

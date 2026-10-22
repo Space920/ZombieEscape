@@ -8,10 +8,7 @@ import type {
   ServersResponse,
   SortOption,
 } from "@/types/server";
-import {
-  FEATURED_SERVER_IDS,
-  SHOW_MORE_AFTER_ID,
-} from "@/data/servers";
+import { FEATURED_SERVER_IDS } from "@/data/servers";
 import { sortServers, computeTotals } from "@/lib/server-sort";
 import {
   readClientServersCache,
@@ -26,6 +23,7 @@ import { useTranslations } from "@/i18n/LocaleProvider";
 import { LIVE_SERVERS_PATH } from "@/lib/live-data-paths";
 
 const REFRESH_INTERVAL = 60_000;
+const INITIAL_CS2_VISIBLE = 10;
 
 const FEATURED_ORDER = Object.fromEntries(
   FEATURED_SERVER_IDS.map((id, index) => [id, index]),
@@ -140,26 +138,17 @@ export default function ServerBrowser() {
     );
   }, [cs2Servers]);
 
-  // Cutoff only applies for the default player sort: everything after PSE stays behind Show more.
   const forceExpandList =
-    communityFilter !== "all" ||
-    Boolean(search) ||
-    showMoreCs2 ||
-    sortBy !== "most-players";
+    communityFilter !== "all" || Boolean(search) || showMoreCs2;
 
   const { visibleCs2, hiddenCount } = useMemo(() => {
-    if (forceExpandList) {
-      return { visibleCs2: cs2Servers, hiddenCount: 0 };
-    }
-
-    const cutoff = cs2Servers.findIndex((s) => s.id === SHOW_MORE_AFTER_ID);
-    if (cutoff === -1) {
+    if (forceExpandList || cs2Servers.length <= INITIAL_CS2_VISIBLE) {
       return { visibleCs2: cs2Servers, hiddenCount: 0 };
     }
 
     return {
-      visibleCs2: cs2Servers.slice(0, cutoff + 1),
-      hiddenCount: cs2Servers.length - (cutoff + 1),
+      visibleCs2: cs2Servers.slice(0, INITIAL_CS2_VISIBLE),
+      hiddenCount: cs2Servers.length - INITIAL_CS2_VISIBLE,
     };
   }, [cs2Servers, forceExpandList]);
 

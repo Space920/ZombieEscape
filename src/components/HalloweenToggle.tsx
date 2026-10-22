@@ -28,7 +28,7 @@ export default function HalloweenToggle() {
         setEnabled(next);
         rememberHalloweenEnabled(next);
       }}
-      className="rounded border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-2.5 py-1.5 text-xs text-[var(--text-secondary)] transition-colors hover:border-[var(--border-green)] hover:text-[var(--text-primary)]"
+      className="rounded-md border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-2.5 py-1.5 text-xs text-[var(--text-secondary)] transition-colors hover:border-[var(--border-green)] hover:text-[var(--text-primary)]"
       aria-pressed={enabled}
     >
       {enabled ? t("halloween.hide") : t("halloween.show")}

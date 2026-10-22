@@ -209,6 +209,16 @@ export const COMMUNITIES: Record<CommunityId, CommunityMeta> = {
     initials: "UP",
     logoFile: "upkk",
   },
+  open: {
+    id: "open",
+    label: "ZE",
+    shortLabel: "ZE",
+    filterLabel: "Other",
+    accent: "#86efac",
+    accentDim: "#166534",
+    initials: "ZE",
+    logoFile: "open",
+  },
 };
 
 /** Broad server regions shown in the browser */

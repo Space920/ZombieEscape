@@ -2,6 +2,7 @@ import Link from "next/link";
 import CursorGlow from "@/components/CursorGlow";
 import SiteFooter from "@/components/SiteFooter";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import PeakHoursToggle from "@/components/PeakHoursToggle";
 import Breadcrumbs, { type BreadcrumbItem } from "@/components/Breadcrumbs";
 
 interface SeoPageShellProps {
@@ -27,7 +28,10 @@ export default function SeoPageShell({
           >
             ← Live server browser
           </Link>
-          <LanguageSwitcher />
+          <div className="flex items-center gap-2">
+            <PeakHoursToggle />
+            <LanguageSwitcher />
+          </div>
         </nav>
       </div>
       <main className="relative z-10 mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-10">

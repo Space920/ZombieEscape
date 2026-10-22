@@ -27,7 +27,7 @@
     --glow-green: rgba(57, 255, 20, 0.05);
     --glow-green-strong: rgba(57, 255, 20, 0.09);
     --text-primary: #f0f4f0;
-    --text-secondary: #5a6e5a;
+    --text-secondary: #7a917a;
     --fog-green: rgba(20, 40, 20, 0.35);
 
     --mouse-x: 50%;
@@ -105,11 +105,12 @@
 
   .ze-card {
     border: 1px solid var(--border-subtle);
-    background: color-mix(in srgb, var(--bg-surface) 80%, transparent);
+    background: color-mix(in srgb, var(--bg-surface) 88%, transparent);
   }
 
   .ze-card-hover:hover {
     border-color: var(--border-green);
+    background: color-mix(in srgb, var(--accent-green) 5%, var(--bg-surface));
   }
 
   .ze-title-split {
@@ -126,7 +127,34 @@
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+    text-shadow:
+      0 0 18px rgba(57, 255, 20, 0.45),
+      0 0 42px rgba(57, 255, 20, 0.18);
+  }
+
+  .ze-join {
+    box-shadow: 0 0 16px rgba(57, 255, 20, 0.22);
+  }
+
+  .live-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.7);
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
   }
 }
 
@@ -279,7 +307,8 @@ html.is-scrolling .pumpkin-lit {
 
   .halloween-zombie,
   .zombie-hop,
-  .pumpkin-lit {
+  .pumpkin-lit,
+  .live-dot {
     animation: none;
   }
 

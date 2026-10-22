@@ -9,6 +9,7 @@ import CommunityLinks from "./CommunityLinks";
 import TrendIndicator from "./TrendIndicator";
 import MiniSparkline from "./MiniSparkline";
 import MapProgressPanel from "./MapProgressPanel";
+import PeakHoursPanel from "./PeakHoursPanel";
 import { hasMapProgress } from "@/data/community-maps";
 import {
   formatDateTime,
@@ -260,6 +261,13 @@ export default function ServerDetailModal({
                 <MapProgressPanel
                   community={server.community}
                   enabled={!!server}
+                />
+              )}
+
+              {detail.peaks && detail.peaks.samples > 0 && (
+                <PeakHoursPanel
+                  summary={detail.peaks}
+                  title={t("peaks.detailTitle")}
                 />
               )}
 

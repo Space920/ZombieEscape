@@ -73,6 +73,18 @@ const zh: Messages = {
     summary:
       "本周：{visitors} 次访问 · ZE 在线峰值 {peak} · 平均 ~{avg} 同时在线",
   },
+  peaks: {
+    title: "高峰时段",
+    open: "高峰时段",
+    detailTitle: "高峰时段",
+    collecting: "仍在收集高峰时段，过几天再来看。",
+    busiest: "通常最忙：{weekday} {time} 左右",
+    record: "纪录：{when} {players} 人",
+    weekdays: "星期",
+    hours: "时段",
+    localNote: "小时图使用你的本地时区。",
+    samples: "{count} 个样本",
+  },
   gameGroups: {
     featuredTitle: "最受欢迎",
     featuredSubtitle:

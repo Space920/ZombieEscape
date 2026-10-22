@@ -4,7 +4,7 @@ import { LOCALES } from "@/i18n/config";
 import { useLocale } from "@/i18n/LocaleProvider";
 
 const selectClass =
-  "rounded border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-2.5 py-1.5 text-xs text-[var(--text-primary)] focus:border-[var(--border-green)] focus:outline-none";
+  "rounded-md border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-2.5 py-1.5 text-xs text-[var(--text-primary)] focus:border-[var(--border-green)] focus:outline-none";
 
 export default function LanguageSwitcher() {
   const { locale, setLocale, t } = useLocale();

@@ -8,15 +8,21 @@ export interface FallbackLive {
   players: number;
   maxPlayers: number;
   map: string;
+  name: string;
+  country: string;
+  history: number[];
 }
 
 interface FallbackServer {
+  hostname?: string;
   ip?: string;
   port?: number;
   status?: string;
   current_players?: number;
   max_players?: number;
   map?: string;
+  country_iso_code?: string;
+  players_history?: number[];
 }
 
 interface FallbackResponse {
@@ -27,6 +33,17 @@ let cache: { at: number; index: Map<string, FallbackLive> } | null = null;
 
 function keyFor(host: string, port: number) {
   return `${host}:${port}`;
+}
+
+function cleanName(hostname: string | undefined) {
+  const cut = (hostname ?? "").split("|")[0]?.trim() ?? "";
+  return cut.slice(0, 48);
+}
+
+function recentHistory(values: number[] | undefined) {
+  if (!values?.length) return [];
+  const numeric = values.filter((value) => Number.isFinite(value));
+  return numeric.slice(-24);
 }
 
 export async function fetchLiveFallbackIndex(): Promise<
@@ -59,6 +76,9 @@ export async function fetchLiveFallbackIndex(): Promise<
         players: server.current_players ?? 0,
         maxPlayers: server.max_players ?? 0,
         map: server.map ?? "—",
+        name: cleanName(server.hostname),
+        country: (server.country_iso_code ?? "").toUpperCase(),
+        history: recentHistory(server.players_history),
       });
     }
 

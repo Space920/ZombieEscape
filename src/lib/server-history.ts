@@ -78,7 +78,10 @@ function stintFromSegment(
     map: segment[0].map,
     startedAt: segment[0].time,
     endedAt: isCurrent ? null : segment[segment.length - 1].time,
-    durationMinutes: Math.max(elapsedMinutes, segment.length * 6),
+    durationMinutes:
+      elapsedMinutes > 0
+        ? elapsedMinutes
+        : Math.max(0, (segment.length - 1) * 6),
     peakPlayers: Math.max(...playerCounts),
     startPlayers,
     endPlayers,

@@ -76,6 +76,19 @@ const es: Messages = {
     summary:
       "Esta semana: {visitors} visitantes · pico {peak} jugadores ZE · ~{avg} media concurrente",
   },
+  peaks: {
+    title: "Horas pico",
+    open: "Horas pico",
+    detailTitle: "Horas pico",
+    collecting:
+      "Aún se están recogiendo horas pico. Vuelve en unos días.",
+    busiest: "Suele haber más gente: {weekday} hacia las {time}",
+    record: "Récord: {players} jugadores el {when}",
+    weekdays: "Día de la semana",
+    hours: "Hora del día",
+    localNote: "El gráfico de horas usa tu zona horaria local.",
+    samples: "{count} muestras",
+  },
   gameGroups: {
     featuredTitle: "Más populares",
     featuredSubtitle:

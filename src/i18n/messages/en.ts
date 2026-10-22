@@ -74,6 +74,19 @@ const en = {
     summary:
       "This week: {visitors} site visitors · peak {peak} ZE players online · ~{avg} avg concurrent",
   },
+  peaks: {
+    title: "Peak Times",
+    open: "Peak times",
+    detailTitle: "Peak Times",
+    collecting:
+      "Still collecting peak hours. Check back after a few days of samples.",
+    busiest: "Usually busiest: {weekday} around {time}",
+    record: "Record: {players} players on {when}",
+    weekdays: "Weekday",
+    hours: "Hour of day",
+    localNote: "Hour chart uses your local timezone.",
+    samples: "{count} samples",
+  },
   gameGroups: {
     featuredTitle: "Most popular",
     featuredSubtitle:

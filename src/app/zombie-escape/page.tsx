@@ -107,7 +107,8 @@ export default function ZombieEscapePage() {
       <JsonLd data={breadcrumbJsonLd} />
 
       <h1 className="text-2xl font-bold text-[var(--text-primary)] sm:text-3xl">
-        Zombie Escape in Counter-Strike
+        <span className="text-[var(--accent-green)]">Zombie Escape</span> in
+        Counter-Strike
       </h1>
       <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
         <strong className="text-[var(--text-primary)]">Zombie Escape</strong>{" "}

@@ -12,6 +12,7 @@ import {
 import CommunityLogo from "./CommunityLogo";
 import MapNameLink from "./MapNameLink";
 import { liveServerDetailPath } from "@/lib/live-data-paths";
+import PeakHoursPanel from "@/components/PeakHoursPanel";
 
 interface ServerLivePreviewProps {
   serverId: string;
@@ -142,6 +143,11 @@ export default function ServerLivePreview({ serverId }: ServerLivePreviewProps) 
         Server information is queried automatically and may occasionally be
         delayed.
       </p>
+      {detail.peaks && detail.peaks.samples > 0 && (
+        <div className="mt-3">
+          <PeakHoursPanel summary={detail.peaks} />
+        </div>
+      )}
     </div>
   );
 }

@@ -180,6 +180,3 @@ export const SERVERS: ServerEntry[] = [
 
 /** Featured “most popular” picks — also appear in the main CS2 list. */
 export const FEATURED_SERVER_IDS = ["gfl", "mapeadores", "possession"] as const;
-
-/** Main-list cutoff: servers after this id (when sorted) stay behind Show more. */
-export const SHOW_MORE_AFTER_ID = "possession";

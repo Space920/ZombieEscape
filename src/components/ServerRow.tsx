@@ -73,7 +73,7 @@ export default function ServerRow({
 
   return (
     <article
-      className={`relative overflow-hidden ze-card ze-card-hover group flex flex-col gap-2 rounded px-2.5 py-2 transition-colors sm:px-3.5 ${gameStyle.borderClass} ${
+      className={`relative overflow-hidden ze-card ze-card-hover group flex flex-col gap-2 rounded-md px-2.5 py-2.5 transition-colors sm:px-3.5 ${gameStyle.borderClass} ${
         server.online ? "" : "opacity-55"
       }`}
     >
@@ -137,8 +137,8 @@ export default function ServerRow({
             <CommunityLinks website={server.website} discord={server.discord} />
             <span
               className={`font-mono text-[13px] font-bold tabular-nums sm:hidden ${
-                server.online
-                  ? "text-[var(--text-primary)]"
+                server.online && server.players > 0
+                  ? "text-[var(--accent-green)]"
                   : "text-[var(--text-secondary)]"
               }`}
             >
@@ -151,8 +151,8 @@ export default function ServerRow({
           <div className="hidden shrink-0 text-right sm:block">
             <p
               className={`font-mono text-[15px] font-bold tabular-nums ${
-                server.online
-                  ? "text-[var(--text-primary)]"
+                server.online && server.players > 0
+                  ? "text-[var(--accent-green)]"
                   : "text-[var(--text-secondary)]"
               }`}
             >
@@ -167,9 +167,9 @@ export default function ServerRow({
 
           <a
             href={connectUrl}
-            className={`rounded px-3.5 py-1.5 text-[12px] font-bold transition-colors sm:text-[13px] ${
+            className={`rounded-md px-3.5 py-1.5 text-[12px] font-bold transition-[filter,box-shadow] sm:text-[13px] ${
               server.online
-                ? "bg-[var(--accent-green)] text-black hover:brightness-110"
+                ? "ze-join bg-[var(--accent-green)] text-black hover:brightness-110"
                 : "pointer-events-none cursor-not-allowed bg-[var(--border-subtle)] text-[var(--text-secondary)]"
             }`}
             aria-disabled={!server.online}
@@ -181,7 +181,7 @@ export default function ServerRow({
             <button
               type="button"
               onClick={onDetails}
-              className="rounded border border-[var(--border-subtle)] px-2.5 py-1.5 text-[12px] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-green)] hover:text-[var(--text-primary)]"
+              className="rounded-md border border-[var(--border-subtle)] px-2.5 py-1.5 text-[12px] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-green)] hover:text-[var(--text-primary)]"
             >
               {t("serverRow.details")}
             </button>
@@ -191,7 +191,7 @@ export default function ServerRow({
             type="button"
             onClick={() => onCopy(ipAddress, `ip-${server.id}`)}
             aria-label={t("serverRow.copyIpAria", { ip: ipAddress })}
-            className="rounded border border-[var(--border-subtle)] px-2.5 py-1.5 text-[12px] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-green)] hover:text-[var(--text-primary)]"
+            className="rounded-md border border-[var(--border-subtle)] px-2.5 py-1.5 text-[12px] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-green)] hover:text-[var(--text-primary)]"
           >
             {copiedId === `ip-${server.id}`
               ? t("serverRow.copied")
@@ -202,7 +202,7 @@ export default function ServerRow({
             type="button"
             onClick={() => onCopy(consoleCmd, `cmd-${server.id}`)}
             aria-label={t("serverRow.copyConnect")}
-            className="rounded border border-[var(--border-subtle)] px-2 py-1.5 text-[12px] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-green)] hover:text-[var(--text-primary)]"
+            className="rounded-md border border-[var(--border-subtle)] px-2 py-1.5 text-[12px] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-green)] hover:text-[var(--text-primary)]"
             title={t("serverRow.copyConnect")}
           >
             {copiedId === `cmd-${server.id}` ? "✓" : "⌘"}

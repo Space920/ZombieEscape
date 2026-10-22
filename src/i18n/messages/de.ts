@@ -76,6 +76,19 @@ const de: Messages = {
     summary:
       "Diese Woche: {visitors} Besucher · Spitze {peak} ZE-Spieler online · ~{avg} Ø gleichzeitig",
   },
+  peaks: {
+    title: "Peak-Zeiten",
+    open: "Peak-Zeiten",
+    detailTitle: "Peak-Zeiten",
+    collecting:
+      "Peak-Zeiten werden noch gesammelt. Schau in ein paar Tagen nochmal vorbei.",
+    busiest: "Meist am vollsten: {weekday} gegen {time}",
+    record: "Rekord: {players} Spieler am {when}",
+    weekdays: "Wochentag",
+    hours: "Uhrzeit",
+    localNote: "Das Stunden-Diagramm nutzt deine lokale Zeitzone.",
+    samples: "{count} Stichproben",
+  },
   gameGroups: {
     featuredTitle: "Beliebteste",
     featuredSubtitle:

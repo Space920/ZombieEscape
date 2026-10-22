@@ -29,13 +29,16 @@ export default function ServerStatsBar({
 
   return (
     <div
-      className="mb-4 flex flex-wrap items-baseline gap-x-5 gap-y-1 pb-1 text-sm"
+      className="mb-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm"
       aria-label={t("stats.ariaLabel")}
     >
       {items.map((item) => (
-        <div key={item.label} className="flex items-baseline gap-1.5">
+        <div key={item.label} className="flex items-baseline gap-2">
+          {item.highlight && (
+            <span className="live-dot mb-0.5 inline-block" aria-hidden="true" />
+          )}
           <span
-            className={`text-base font-bold tabular-nums ${
+            className={`text-lg font-bold tabular-nums ${
               item.highlight
                 ? "text-[var(--accent-green)]"
                 : "text-[var(--text-primary)]"

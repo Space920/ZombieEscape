@@ -76,6 +76,19 @@ const ru: Messages = {
     summary:
       "За неделю: {visitors} посетителей · пик {peak} игроков ZE · ~{avg} в среднем онлайн",
   },
+  peaks: {
+    title: "Часы пик",
+    open: "Часы пик",
+    detailTitle: "Часы пик",
+    collecting:
+      "Часы пик ещё собираются. Загляните через несколько дней.",
+    busiest: "Обычно больше всего игроков: {weekday} около {time}",
+    record: "Рекорд: {players} игроков {when}",
+    weekdays: "День недели",
+    hours: "Час дня",
+    localNote: "График часов в вашем часовом поясе.",
+    samples: "{count} замеров",
+  },
   gameGroups: {
     featuredTitle: "Самые популярные",
     featuredSubtitle:

@@ -75,6 +75,18 @@ const ko: Messages = {
     summary:
       "이번 주: {visitors}명 방문 · 최고 {peak}명 ZE 접속 · 평균 ~{avg}명 동시 접속",
   },
+  peaks: {
+    title: "피크 시간",
+    open: "피크 시간",
+    detailTitle: "피크 시간",
+    collecting: "피크 시간을 모으는 중입니다. 며칠 뒤 다시 확인해 주세요.",
+    busiest: "보통 가장 붐빔: {weekday} {time}경",
+    record: "기록: {when} {players}명",
+    weekdays: "요일",
+    hours: "시간대",
+    localNote: "시간 그래프는 로컬 시간대입니다.",
+    samples: "샘플 {count}개",
+  },
   gameGroups: {
     featuredTitle: "인기 서버",
     featuredSubtitle:

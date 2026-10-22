@@ -31,6 +31,15 @@ yarn-error.log*
 # env files
 .env*.local
 
+# Generated outbound link — filled at build time, not stored in source
+/public/data/directory.json
+
+# Own 24h A2S samples — persisted on the live site, not in git
+/public/data/history.json
+
+# Rolling peak hour / weekday aggregates — persisted on the live site
+/public/data/peaks.json
+
 # local stats persistence
 /.data/
 

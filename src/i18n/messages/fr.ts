@@ -76,6 +76,19 @@ const fr: Messages = {
     summary:
       "Cette semaine : {visitors} visiteurs · pic {peak} joueurs ZE · ~{avg} moy. concurrents",
   },
+  peaks: {
+    title: "Heures de pointe",
+    open: "Heures de pointe",
+    detailTitle: "Heures de pointe",
+    collecting:
+      "Les heures de pointe sont encore en cours de collecte. Revenez dans quelques jours.",
+    busiest: "En général le plus chargé : {weekday} vers {time}",
+    record: "Record : {players} joueurs le {when}",
+    weekdays: "Jour",
+    hours: "Heure",
+    localNote: "Le graphique horaire utilise votre fuseau local.",
+    samples: "{count} échantillons",
+  },
   gameGroups: {
     featuredTitle: "Les plus populaires",
     featuredSubtitle:
