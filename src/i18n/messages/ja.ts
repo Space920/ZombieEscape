@@ -51,6 +51,8 @@ const ja: Messages = {
     resetFilters: "フィルターをリセット",
     liveNote:
       "サーバー情報は自動的に取得されます。更新が遅れる場合があります。",
+    staleMaps:
+      "このデータは {minutes} 分前です。現在のマップは変わっている可能性があります。",
     showMore: "他のサーバーを表示 ({count})",
   },
   activity: {

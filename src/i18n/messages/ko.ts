@@ -51,6 +51,8 @@ const ko: Messages = {
     resetFilters: "필터 초기화",
     liveNote:
       "서버 정보는 자동으로 조회되며 때때로 지연될 수 있습니다.",
+    staleMaps:
+      "이 데이터는 {minutes}분 전입니다. 현재 맵이 바뀌었을 수 있습니다.",
     showMore: "서버 더 보기 ({count})",
   },
   activity: {

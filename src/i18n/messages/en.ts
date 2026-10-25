@@ -50,6 +50,8 @@ const en = {
     resetFilters: "Reset filters",
     liveNote:
       "Server information is queried automatically and may occasionally be delayed.",
+    staleMaps:
+      "These snapshots are {minutes} minutes old. Current maps may have changed.",
     showMore: "Show more servers ({count})",
   },
   activity: {

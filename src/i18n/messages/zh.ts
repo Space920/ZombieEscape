@@ -49,6 +49,7 @@ const zh: Messages = {
     noData: "目前没有可用的服务器数据。",
     resetFilters: "重置筛选",
     liveNote: "服务器信息自动查询，偶尔可能有延迟。",
+    staleMaps: "这些数据已有 {minutes} 分钟。当前地图可能已更换。",
     showMore: "显示更多服务器（{count}）",
   },
   activity: {

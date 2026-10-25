@@ -52,6 +52,8 @@ const de: Messages = {
     resetFilters: "Filter zurücksetzen",
     liveNote:
       "Serverinformationen werden automatisch abgefragt und können gelegentlich verzögert sein.",
+    staleMaps:
+      "Diese Daten sind {minutes} Minuten alt. Die aktuelle Map kann sich inzwischen geändert haben.",
     showMore: "Mehr Server anzeigen ({count})",
   },
   activity: {

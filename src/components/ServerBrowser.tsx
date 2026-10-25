@@ -49,6 +49,7 @@ export default function ServerBrowser() {
 
   const refreshLock = useRef(false);
   const hasLoaded = useRef(false);
+  const [nowMs, setNowMs] = useState(() => Date.now());
 
   useEffect(() => {
     const mapQuery = searchParams.get("map");
@@ -98,8 +99,17 @@ export default function ServerBrowser() {
 
     fetchServers();
     const interval = setInterval(() => fetchServers(true), REFRESH_INTERVAL);
-    return () => clearInterval(interval);
+    const clock = setInterval(() => setNowMs(Date.now()), 30_000);
+    return () => {
+      clearInterval(interval);
+      clearInterval(clock);
+    };
   }, [fetchServers]);
+
+  const staleMinutes =
+    lastUpdated && nowMs - lastUpdated.getTime() >= 25 * 60_000
+      ? Math.max(1, Math.round((nowMs - lastUpdated.getTime()) / 60_000))
+      : 0;
 
   const filtered = useMemo(() => {
     let list = servers;
@@ -206,6 +216,15 @@ export default function ServerBrowser() {
         lastUpdated={lastUpdated}
         hasData={hasData}
       />
+
+      {staleMinutes > 0 && (
+        <div
+          className="mb-4 rounded-lg border border-ze-amber/30 bg-ze-amber/10 px-4 py-2.5 text-sm text-ze-amber"
+          role="status"
+        >
+          {t("browser.staleMaps", { minutes: staleMinutes })}
+        </div>
+      )}
 
       {error && (
         <div

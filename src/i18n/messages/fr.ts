@@ -52,6 +52,8 @@ const fr: Messages = {
     resetFilters: "Réinitialiser les filtres",
     liveNote:
       "Les informations serveur sont interrogées automatiquement et peuvent parfois être retardées.",
+    staleMaps:
+      "Ces données datent de {minutes} minutes. La map actuelle a peut-être changé.",
     showMore: "Afficher plus de serveurs ({count})",
   },
   activity: {

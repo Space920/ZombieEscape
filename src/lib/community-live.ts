@@ -167,14 +167,11 @@ export function applyCommunityLive(
 
   return servers.map((server) => {
     const live = byId.get(server.id as CommunityLiveId);
-    if (!live) return server;
-    if (server.online && server.players > 0 && server.map !== "—") {
-      return server;
-    }
+    if (!live?.online) return server;
 
     return {
       ...server,
-      online: live.online,
+      online: true,
       players: live.players,
       maxPlayers: live.maxPlayers || server.maxPlayers,
       map: live.map || server.map,
@@ -199,40 +196,53 @@ export function applyCommunityDetail<T extends {
   } | null;
 }>(detail: T, lives: CommunityLive[]): T {
   const live = lives.find((item) => item.community === detail.server.id);
-  if (!live) return detail;
-
-  const serverNeedsFill =
-    !detail.server.online ||
-    detail.server.players <= 0 ||
-    detail.server.map === "—";
+  if (!live?.online) return detail;
 
   const started = live.mapStartedAt ? Date.parse(live.mapStartedAt) : NaN;
+  const durationMinutes = Number.isFinite(started)
+    ? Math.max(0, Math.round((Date.now() - started) / 60_000))
+    : detail.currentMap?.durationMinutes ?? 0;
+  const startedAt =
+    live.mapStartedAt && Number.isFinite(started)
+      ? live.mapStartedAt
+      : detail.currentMap?.map === live.map
+        ? detail.currentMap.startedAt
+        : new Date().toISOString();
+
   const currentMap =
-    detail.currentMap &&
-    live.mapStartedAt &&
-    Number.isFinite(started) &&
-    detail.currentMap.map === live.map
+    live.map && detail.currentMap?.map === live.map
       ? {
           ...detail.currentMap,
-          startedAt: live.mapStartedAt,
+          startedAt,
           durationMinutes: Math.max(
-            0,
-            Math.round((Date.now() - started) / 60_000),
+            detail.currentMap.durationMinutes,
+            durationMinutes,
           ),
         }
-      : detail.currentMap;
+      : live.map
+        ? {
+            map: live.map,
+            startedAt,
+            durationMinutes,
+            endedAt: null,
+            peakPlayers: live.players,
+            startPlayers: live.players,
+            endPlayers: live.players,
+            trend: "flat" as const,
+            playerCounts: live.players > 0 ? [live.players] : [],
+            isCurrent: true,
+          }
+        : detail.currentMap;
 
   return {
     ...detail,
-    server: serverNeedsFill
-      ? {
-          ...detail.server,
-          online: live.online,
-          players: live.players,
-          maxPlayers: live.maxPlayers || detail.server.maxPlayers,
-          map: live.map || detail.server.map,
-        }
-      : detail.server,
+    server: {
+      ...detail.server,
+      online: true,
+      players: live.players,
+      maxPlayers: live.maxPlayers || detail.server.maxPlayers,
+      map: live.map || detail.server.map,
+    },
     playerList:
       detail.playerList.length > 0 ? detail.playerList : live.playerList,
     currentMap,

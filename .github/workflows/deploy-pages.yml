@@ -4,22 +4,39 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "*/15 * * * *"
+    # GitHub drops most */15 schedules. These off-hour slots only restart
+    # the keep-alive chain if it dies.
+    - cron: "7,37 * * * *"
   workflow_dispatch:
+    inputs:
+      chain:
+        description: Internal follow-up refresh
+        type: boolean
+        default: false
+      keep_alive:
+        description: Queue another refresh after this deploy
+        type: boolean
+        default: true
 
 permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
+      - name: Wait for next live snapshot
+        if: github.event_name == 'workflow_dispatch' && inputs.chain
+        run: sleep 600
+
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
@@ -34,7 +51,20 @@ jobs:
           MAP_PROGRESS_MAPEADORES_CSV: ${{ secrets.MAP_PROGRESS_MAPEADORES_CSV }}
           MAP_PROGRESS_GFL_CSV: ${{ secrets.MAP_PROGRESS_GFL_CSV }}
         run: npm run generate:data
-      - run: npm run build
+      - name: Restore static export cache
+        id: out-cache
+        uses: actions/cache@v4
+        with:
+          path: out
+          key: pages-out-${{ hashFiles('package-lock.json', 'next.config.ts', 'tsconfig.json', 'src/**') }}
+      - name: Build site
+        if: steps.out-cache.outputs.cache-hit != 'true'
+        run: npm run build
+      - name: Refresh live JSON in cached export
+        if: steps.out-cache.outputs.cache-hit == 'true'
+        run: |
+          mkdir -p out/data
+          cp -a public/data/. out/data/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
@@ -48,3 +78,23 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  queue-next:
+    needs: deploy
+    if: |
+      success() &&
+      github.ref == 'refs/heads/main' &&
+      (github.event_name != 'workflow_dispatch' || inputs.keep_alive)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Queue follow-up refresh
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy-pages.yml',
+              ref: 'main',
+              inputs: { chain: 'true', keep_alive: 'true' },
+            });

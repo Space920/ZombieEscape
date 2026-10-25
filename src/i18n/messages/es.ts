@@ -52,6 +52,8 @@ const es: Messages = {
     resetFilters: "Restablecer filtros",
     liveNote:
       "La información del servidor se consulta automáticamente y puede retrasarse ocasionalmente.",
+    staleMaps:
+      "Estos datos tienen {minutes} minutos de antigüedad. El mapa actual puede haber cambiado.",
     showMore: "Mostrar más servidores ({count})",
   },
   activity: {
