@@ -4,8 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    # GitHub drops most */15 schedules. These off-hour slots only restart
-    # the keep-alive chain if it dies.
+    # Off-hour fallback if the keep-alive chain dies. GitHub drops */15 crons.
     - cron: "7,37 * * * *"
   workflow_dispatch:
     inputs:
@@ -51,20 +50,22 @@ jobs:
           MAP_PROGRESS_MAPEADORES_CSV: ${{ secrets.MAP_PROGRESS_MAPEADORES_CSV }}
           MAP_PROGRESS_GFL_CSV: ${{ secrets.MAP_PROGRESS_GFL_CSV }}
         run: npm run generate:data
-      - name: Restore static export cache
-        id: out-cache
-        uses: actions/cache@v4
-        with:
-          path: out
-          key: pages-out-${{ hashFiles('package-lock.json', 'next.config.ts', 'tsconfig.json', 'src/**') }}
-      - name: Build site
-        if: steps.out-cache.outputs.cache-hit != 'true'
-        run: npm run build
-      - name: Refresh live JSON in cached export
-        if: steps.out-cache.outputs.cache-hit == 'true'
+      - name: Confirm snapshot is fresh
         run: |
-          mkdir -p out/data
-          cp -a public/data/. out/data/
+          node -e "
+            const fs = require('fs');
+            const data = JSON.parse(fs.readFileSync('public/data/servers.json', 'utf8'));
+            const ageMin = (Date.now() - Date.parse(data.updatedAt)) / 60000;
+            if (!Number.isFinite(ageMin) || ageMin > 5) {
+              console.error('servers.json is stale', data.updatedAt, 'ageMin=', ageMin);
+              process.exit(1);
+            }
+            const gfl = data.servers.find((s) => s.id === 'gfl');
+            console.log('snapshot', data.updatedAt, 'gfl', gfl && gfl.map, 'players', data.totals.players);
+          "
+      # Always rebuild. Caching `out` and copying JSON left GitHub Pages
+      # serving an old export (Last-Modified stuck) even when generate:data ran.
+      - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
